@@ -60,7 +60,9 @@ function timer(seconds) {
 
     const timerinterval=setInterval(function() {
         const secondsLeft = Math.round((then-Date.now())/1000);
-        console.log(secondsLeft);
+        displayTime(secondsLeft, pomodoroTime);
+        displayTime(secondsLeft, shortBreakTime);
+        displayTime(secondsLeft, longBreakTime);
 
         if(secondsLeft<1) {
             clearInterval(timerinterval);
@@ -69,7 +71,39 @@ function timer(seconds) {
 },1000);
 
 };
-timer(5);
+function displayTime(seconds,element){
+    const  minute = Math.floor(seconds/60);
+    const second = seconds % 60;
+    
+
+    element.innerText = minute + " : " + second;
+    
+}
+const pomodoroTime = document.getElementById("pomodoroTime");
+const shortBreakTime = document.getElementById("shortBreakTime");
+const longBreakTime = document.getElementById("longBreakTime");
+
+const pomodoroButton =document.getElementById("pomodoroButton");
+const shortBreakButton =document.getElementById("shortBreakButton");
+const longBreakButton =document.getElementById("longBreakButton");
+
+pomodoroButton.addEventListener("click",function (){
+    const pomodoroTotalTime =1500;
+    timer(pomodoroTotalTime);
+});
+
+shortBreakButton.addEventListener("click",function (){
+    const shortBreakTotalTime =300;
+    timer(shortBreakTotalTime);
+});
+
+longBreakButton.addEventListener("click",function (){
+    const longBreakTotalTime =900;
+    timer(longBreakTotalTime);
+
+});
+
+
 
 // setInterval(function() {
 //     console.log(new Date().toISOString());
